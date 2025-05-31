@@ -91,7 +91,13 @@ app.post("/likeGithubUser", async (req, res) => {
     const data = snapshot.exists() ? snapshot.val() : {};
 
     const updatedFavorites = new Set(data.favorite_github_users || []);
-    updatedFavorites.add(github_user_id);
+    if(updatedFavorites.has(github_user_id)){
+      updatedFavorites.delete(github_user_id);//unlike
+    }
+    else{
+      updatedFavorites.add(github_user_id);// like
+    }
+    
 
     await set(ref(db, `users/${phone_number}`), {
       ...data,
