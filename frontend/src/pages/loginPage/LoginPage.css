@@ -1,0 +1,16 @@
+.loginPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f2f5; /* Màu nền nhẹ nhàng */
+  height: 100vh;
+}
+.loginPage h2 {
+  margin-bottom: 20px;
+}
+.inputPhoneNum {
+  margin-bottom: 10px;
+  width: 300px;
+  cursor: pointer;
+}

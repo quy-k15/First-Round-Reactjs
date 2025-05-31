@@ -12,6 +12,7 @@ const Headers = ({ onSearch }) => {
     if (!input.trim()) return;
     onSearch(input); // gửi query lên cha
     navigate("/search");
+    setInput("");
   };
 
   const handleProfileClick = () => {
@@ -25,7 +26,8 @@ const Headers = ({ onSearch }) => {
         enterButton="Search"
         onSearch={handleSearchClick}
         onChange={(e) => setInput(e.target.value)}
-        style={{ width: 300 }}
+        value={input}
+        className="inputSearch"
       />
       <FaUserAlt onClick={handleProfileClick} className="iconProfile" />
     </div>

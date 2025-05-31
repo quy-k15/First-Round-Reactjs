@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Table, Avatar, message } from "antd";
+import { Table, Avatar, message, pagination } from "antd";
 import api from "../../services/api";
 import { HeartTwoTone, HeartOutlined } from "@ant-design/icons";
 import "./ProfilePage.css";
@@ -88,11 +88,10 @@ const ProfilePage = () => {
     <div className="profilePage">
       <UserProfileCard />
       <h2>List of liked GitHub users</h2>
-       <Table
+      <Table
         rowKey="id"
         columns={columns}
         dataSource={usersLiked}
-        pagination={false}
         loading={loading}
         expandable={{
           expandedRowRender: (record) => (
@@ -112,6 +111,12 @@ const ProfilePage = () => {
             </div>
           ),
           rowExpandable: () => true,
+        }}
+        pagination={{
+          pageSize: 5, // số dòng mỗi trang
+          showSizeChanger: true, // cho phép chọn số dòng/trang
+          pageSizeOptions: [5, 10, 20, 50], // các lựa chọn
+          showQuickJumper: true, // cho phép nhập số trang
         }}
         scroll={{ x: "max-content" }}
       />

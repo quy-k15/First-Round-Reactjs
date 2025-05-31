@@ -4,16 +4,35 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 2rem;
   background-color: rgb(187, 215, 246);
+  position: relative;
+  margin-top: 5%;
 }
-.userProfileCard h1{
-    margin-top: 0;
+.userProfileCard h1 {
+  margin-top: 0;
 }
 
-.userProfile{
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+.userProfile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
-.iconProfilediv{
-     font-size: 5rem; 
+.iconProfilediv {
+  font-size: 5rem;
+}
+.btnLogOut {
+  position: absolute;
+  z-index: 99;
+  top: 20px;
+  right: 20px;
+}
+@media (max-width: 480px) {
+  .userProfileCard {
+    margin-top: 20%;
+  }
+  .userProfileCard h1 {
+  font-size: 18px;
+}
+  .iconProfilediv {
+    font-size: 3rem;
+  }
 }

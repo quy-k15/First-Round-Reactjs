@@ -102,7 +102,7 @@ const SearchPage = ({ query }) => {
 
   return (
     <div className="searchPage">
-      {/* <Table rowKey="id" columns={columns} dataSource={users} pagination={false}  loading={loading}/> */}
+      <h2>List of users who have '{query}' in their login</h2>
       <Table
         rowKey="id"
         columns={columns}
@@ -131,7 +131,7 @@ const SearchPage = ({ query }) => {
         scroll={{ x: "max-content" }}
       />
 
-      <div style={{ marginTop: 20, textAlign: "right" }}>
+      <div>
         <Pagination
           current={page}
           pageSize={perPage}

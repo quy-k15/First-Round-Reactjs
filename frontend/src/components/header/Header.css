@@ -4,11 +4,17 @@
   align-items: center;
   padding: 1rem 5%;
   border-bottom: 1px solid #ccc;
+   background-color: white;
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 .iconProfile{
   cursor: pointer;
   color: #1677ff;
 }
-.iconProfile:hover{
-  
+.inputSearch{
+  width: 300px;
 }

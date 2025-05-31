@@ -1,3 +1,9 @@
 .searchPage{
     padding: 5%;
 }
+@media (max-width: 480px) {
+  .searchPage {
+    margin-top: 10%;
+  }
+
+}

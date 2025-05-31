@@ -1,7 +1,7 @@
 // src/routes.js
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import LoginPage from "./pages/LoginPage";
+import LoginPage from "./pages/loginPage/LoginPage";
 import SearchPage from "./pages/searchPage/SearchPage";
 import Header from "./components/header/Header";
 import ProfilePage from "./pages/profilePage/ProfilePage";

@@ -1,21 +1,31 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input, Button, message } from "antd";
-import api from "../services/api";
+import api from "../../services/api";
+import "./LoginPage.css";
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const [phone, setPhone] = useState("");
   const [code, setCode] = useState("");
   const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const isValidPhone = (phone) => /^0\d{9}$/.test(phone);
 
   const handleSendCode = async () => {
+    if (!isValidPhone(phone)) {
+      message.warning("Invalid phone number");
+      return;
+    }
+    setLoading(true);
     try {
       await api.createNewAccessCode(phone);
-      message.success("Mã truy cập đã được gửi qua SMS");
+      message.success("Access code sent via SMS");
       setStep(2);
     } catch {
-      message.error("Lỗi khi gửi mã");
+      message.error("Failed to send code");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -24,35 +34,42 @@ export default function LoginPage() {
       const res = await api.validateAccessCode(phone, code);
       if (res.success) {
         localStorage.setItem("phone_number", phone);
-        message.success("Xác thực thành công");
-          navigate("/search"); 
+        message.success("Verification successful");
+        navigate("/search");
         // window.location.href = "/search";
       }
     } catch {
-      message.error("Mã không chính xác");
+      message.error("Incorrect code");
     }
   };
+
   return (
-    <div style={{ padding: 50 }}>
-      <h2>Đăng nhập</h2>
+    <div className="loginPage">
+      <h2>Login</h2>
       <Input
-        placeholder="Nhập số điện thoại"
+        placeholder="Enter your phone number"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
         disabled={step === 2}
-        style={{ marginBottom: 10 }}
+        className="inputPhoneNum"
       />
-      {step === 1 && <Button onClick={handleSendCode}>Gửi mã</Button>}
+      {step === 1 && (
+        <Button onClick={handleSendCode} loading={loading}>
+          Send Code
+        </Button>
+      )}
 
       {step === 2 && (
         <>
           <Input
-            placeholder="Nhập mã truy cập"
+            placeholder="Enter access code"
             value={code}
             onChange={(e) => setCode(e.target.value)}
-            style={{ marginTop: 10, marginBottom: 10 }}
+            className="inputPhoneNum"
           />
-          <Button onClick={handleVerify}>Xác nhận</Button>
+          <Button onClick={handleVerify} loading={loading}>
+            Verify
+          </Button>
         </>
       )}
     </div>
