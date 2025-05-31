@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "antd";
 import { FaUserAlt } from "react-icons/fa";
 import "./Header.css";
 
-const Headers = ({ user, onSearch }) => {
+const Headers = ({ onSearch }) => {
   const [input, setInput] = useState("");
   const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ const Headers = ({ user, onSearch }) => {
         onChange={(e) => setInput(e.target.value)}
         style={{ width: 300 }}
       />
-      <FaUserAlt onClick={handleProfileClick} />
+      <FaUserAlt onClick={handleProfileClick} className="iconProfile" />
     </div>
   );
 };

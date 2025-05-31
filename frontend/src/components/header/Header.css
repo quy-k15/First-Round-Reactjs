@@ -5,3 +5,10 @@
   padding: 1rem 5%;
   border-bottom: 1px solid #ccc;
 }
+.iconProfile{
+  cursor: pointer;
+  color: #1677ff;
+}
+.iconProfile:hover{
+  
+}

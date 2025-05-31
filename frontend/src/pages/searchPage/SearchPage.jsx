@@ -4,7 +4,7 @@ import api from "../../services/api";
 import { HeartTwoTone, HeartOutlined } from "@ant-design/icons";
 import "./SearchPage.css";
 
-export default function SearchPage({ query }) {
+const SearchPage =({ query })=> {
 //   const [query, setQuery] = useState("");
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
@@ -19,6 +19,7 @@ export default function SearchPage({ query }) {
       const res = await api.getUserProfile(phone);
       const likedIds = res.favorite_github_users?.map((u) => u.id) || [];
       setLiked(new Set(likedIds));
+      console.log("like",liked);
     } catch {
       message.error("Không thể tải danh sách yêu thích");
     }
@@ -31,7 +32,6 @@ export default function SearchPage({ query }) {
       const res = await api.searchGithubUsers(query, page, perPage);
       const detailedUsers = await Promise.all(
         res.items.map(async (user) => {
-            console.log(user);
           const details = await api.findGithubUserProfile(user.id);
           return { ...user, ...details };
         })
@@ -55,6 +55,7 @@ export default function SearchPage({ query }) {
         copy.has(userId) ? copy.delete(userId) : copy.add(userId);
         return copy;
       });
+      console.log("liked:", liked);
     } catch {
       message.error("Không thể like");
     }
@@ -99,13 +100,6 @@ export default function SearchPage({ query }) {
 
   return (
     <div className="searchPage">
-      {/* <Input.Search
-        placeholder="Nhập từ khóa..."
-        enterButton="Tìm"
-        onSearch={handleSearch}
-        onChange={(e) => setQuery(e.target.value)}
-        style={{ width: 300, marginBottom: 20 }}
-      /> */}
 
       <Table rowKey="id" columns={columns} dataSource={users} pagination={false}  loading={loading}/>
 
@@ -124,3 +118,4 @@ export default function SearchPage({ query }) {
     </div>
   );
 }
+export default SearchPage;
