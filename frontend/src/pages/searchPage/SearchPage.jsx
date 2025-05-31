@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { Input, Table, Avatar, Pagination, message } from "antd";
+import { Table, Avatar, Pagination, message } from "antd";
 import api from "../../services/api";
 import { HeartTwoTone, HeartOutlined } from "@ant-design/icons";
 import "./SearchPage.css";
 
-const SearchPage =({ query })=> {
-//   const [query, setQuery] = useState("");
+const SearchPage = ({ query }) => {
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
@@ -19,7 +18,7 @@ const SearchPage =({ query })=> {
       const res = await api.getUserProfile(phone);
       const likedIds = res.favorite_github_users?.map((u) => u.id) || [];
       setLiked(new Set(likedIds));
-      console.log("like",liked);
+      console.log("like", liked);
     } catch {
       message.error("Không thể tải danh sách yêu thích");
     }
@@ -41,10 +40,9 @@ const SearchPage =({ query })=> {
     } catch (error) {
       console.error(error);
       message.error("Lỗi tìm kiếm GitHub");
-    }finally{
-        setLoading(false);
+    } finally {
+      setLoading(false);
     }
-
   };
 
   const toggleLike = async (userId) => {
@@ -79,19 +77,23 @@ const SearchPage =({ query })=> {
     {
       title: "GitHub URL",
       dataIndex: "html_url",
+      responsive: ["sm"],
       render: (url) => (
         <a href={url} target="_blank" rel="noreferrer">
           Link
         </a>
       ),
     },
-    { title: "Repos", dataIndex: "public_repos" },
-    { title: "Followers", dataIndex: "followers" },
+    { title: "Repos", dataIndex: "public_repos",  responsive: ["sm"] },
+    { title: "Followers", dataIndex: "followers",  responsive: ["sm"] },
     {
       title: "Like",
       render: (_, record) =>
         liked.has(record.id) ? (
-          <HeartTwoTone twoToneColor="#eb2f96" onClick={() => toggleLike(record.id)} />
+          <HeartTwoTone
+            twoToneColor="#eb2f96"
+            onClick={() => toggleLike(record.id)}
+          />
         ) : (
           <HeartOutlined onClick={() => toggleLike(record.id)} />
         ),
@@ -100,8 +102,34 @@ const SearchPage =({ query })=> {
 
   return (
     <div className="searchPage">
-
-      <Table rowKey="id" columns={columns} dataSource={users} pagination={false}  loading={loading}/>
+      {/* <Table rowKey="id" columns={columns} dataSource={users} pagination={false}  loading={loading}/> */}
+      <Table
+        rowKey="id"
+        columns={columns}
+        dataSource={users}
+        pagination={false}
+        loading={loading}
+        expandable={{
+          expandedRowRender: (record) => (
+            <div style={{ lineHeight: "1.6" }}>
+              <div>
+                <strong>GitHub URL:</strong>{" "}
+                <a href={record.html_url} target="_blank" rel="noreferrer">
+                  {record.html_url}
+                </a>
+              </div>
+              <div>
+                <strong>Repos:</strong> {record.public_repos}
+              </div>
+              <div>
+                <strong>Followers:</strong> {record.followers}
+              </div>
+            </div>
+          ),
+          rowExpandable: () => true,
+        }}
+        scroll={{ x: "max-content" }}
+      />
 
       <div style={{ marginTop: 20, textAlign: "right" }}>
         <Pagination
@@ -117,5 +145,5 @@ const SearchPage =({ query })=> {
       </div>
     </div>
   );
-}
+};
 export default SearchPage;

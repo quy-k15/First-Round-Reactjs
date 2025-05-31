@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Input, Table, Avatar, Pagination, message } from "antd";
+import { Table, Avatar, message } from "antd";
 import api from "../../services/api";
 import { HeartTwoTone, HeartOutlined } from "@ant-design/icons";
 import "./ProfilePage.css";
@@ -62,14 +62,15 @@ const ProfilePage = () => {
     {
       title: "GitHub URL",
       dataIndex: "html_url",
+      responsive: ["sm"],
       render: (url) => (
         <a href={url} target="_blank" rel="noreferrer">
           Link
         </a>
       ),
     },
-    { title: "Repos", dataIndex: "public_repos" },
-    { title: "Followers", dataIndex: "followers" },
+    { title: "Repos", dataIndex: "public_repos", responsive: ["sm"] },
+    { title: "Followers", dataIndex: "followers", responsive: ["sm"] },
     {
       title: "Like",
       render: (_, record) =>
@@ -87,12 +88,32 @@ const ProfilePage = () => {
     <div className="profilePage">
       <UserProfileCard />
       <h2>List of liked GitHub users</h2>
-      <Table
+       <Table
         rowKey="id"
         columns={columns}
         dataSource={usersLiked}
         pagination={false}
         loading={loading}
+        expandable={{
+          expandedRowRender: (record) => (
+            <div style={{ lineHeight: "1.6" }}>
+              <div>
+                <strong>GitHub URL:</strong>{" "}
+                <a href={record.html_url} target="_blank" rel="noreferrer">
+                  {record.html_url}
+                </a>
+              </div>
+              <div>
+                <strong>Repos:</strong> {record.public_repos}
+              </div>
+              <div>
+                <strong>Followers:</strong> {record.followers}
+              </div>
+            </div>
+          ),
+          rowExpandable: () => true,
+        }}
+        scroll={{ x: "max-content" }}
       />
     </div>
   );

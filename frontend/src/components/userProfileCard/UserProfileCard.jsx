@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-import { Input } from "antd";
 import { FaUserAlt } from "react-icons/fa";
 import "./UserProfileCard.css";
 
