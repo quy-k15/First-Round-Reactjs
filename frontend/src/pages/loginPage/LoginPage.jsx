@@ -36,7 +36,6 @@ export default function LoginPage() {
         localStorage.setItem("phone_number", phone);
         message.success("Verification successful");
         navigate("/search");
-        // window.location.href = "/search";
       }
     } catch {
       message.error("Incorrect code");

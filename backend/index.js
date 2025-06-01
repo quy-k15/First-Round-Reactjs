@@ -67,14 +67,12 @@ console.log("GitHub Token (short):", process.env.GITHUB_TOKEN?.slice(0, 10));
 } catch (err) {
   console.error("Axios error:");
   if (err.response) {
-    // Lỗi từ GitHub trả về
     console.error("Status:", err.response.status);
     console.error("Data:", err.response.data);
   } else if (err.request) {
-    // Request đã gửi nhưng không có phản hồi
     console.error("No response received:", err.request);
   } else {
-    // Lỗi khác
+
     console.error("Error message:", err.message);
   }
   res.status(500).json({ error: "Failed to fetch GitHub user profile" });
@@ -111,7 +109,6 @@ app.post("/likeGithubUser", async (req, res) => {
 });
 
 
-// Express
 app.get("/getUserProfile", async (req, res) => {
   const { phone_number } = req.query;
   try {

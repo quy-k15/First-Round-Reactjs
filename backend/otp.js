@@ -1,4 +1,3 @@
-// backend/otp.js
 const { db, ref, set, get } = require("./firebase");
 
 function generateCode() {

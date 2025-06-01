@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000"; // IP back-end
+const BASE_URL = "http://localhost:5000";
 
 const api = {
   createNewAccessCode: (phoneNumber) =>

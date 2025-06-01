@@ -37,11 +37,8 @@ const ProfilePage = () => {
       setUsersLiked((prev) => {
         const exists = prev.find((user) => user.id === userId);
         if (exists) {
-          // Nếu đã like → unliking → xoá khỏi danh sách
           return prev.filter((user) => user.id !== userId);
-        } else {
-          // Nếu chưa có → đang like → gọi API để lấy user detail và thêm vào
-        }
+        } 
       });
     } catch {
       message.error("Không thể like");
@@ -113,10 +110,10 @@ const ProfilePage = () => {
           rowExpandable: () => true,
         }}
         pagination={{
-          pageSize: 5, // số dòng mỗi trang
-          showSizeChanger: true, // cho phép chọn số dòng/trang
-          pageSizeOptions: [5, 10, 20, 50], // các lựa chọn
-          showQuickJumper: true, // cho phép nhập số trang
+          pageSize: 5, 
+          showSizeChanger: true, 
+          pageSizeOptions: [5, 10, 20, 50],
+          showQuickJumper: true, 
         }}
         scroll={{ x: "max-content" }}
       />
