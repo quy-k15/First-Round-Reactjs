@@ -1,13 +1,15 @@
 Cách chạy chương trình:
+
 =================Frontend===========
 npm install antd axios react-router-dom
 npm install firebase
+
 =================backend=============
 npm install express cors body-parser firebase twilio
-
 npm install --save-dev nodemon
 npm install axios
 npm install dotenv
+
 =================Hình ảnh khi chạy chương trình==========
 Trang log in
 ![image](https://github.com/user-attachments/assets/53f4427e-0697-474a-83f0-385a31756a1a)
