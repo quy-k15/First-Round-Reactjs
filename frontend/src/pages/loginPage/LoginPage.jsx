@@ -44,34 +44,36 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="loginPage">
-      <h2>Login</h2>
-      <Input
-        placeholder="Enter your phone number"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-        disabled={step === 2}
-        className="inputPhoneNum"
-      />
-      {step === 1 && (
-        <Button onClick={handleSendCode} loading={loading}>
-          Send Code
-        </Button>
-      )}
-
-      {step === 2 && (
-        <>
-          <Input
-            placeholder="Enter access code"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-            className="inputPhoneNum"
-          />
-          <Button onClick={handleVerify} loading={loading}>
-            Verify
+    <div className="loginPageDiv">
+      <div className="loginPage">
+        <h2>Log in</h2>
+        <Input
+          placeholder="Enter your phone number"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          disabled={step === 2}
+          className="inputPhoneNum"
+        />
+        {step === 1 && (
+          <Button onClick={handleSendCode} loading={loading}>
+            Send Code
           </Button>
-        </>
-      )}
+        )}
+
+        {step === 2 && (
+          <>
+            <Input
+              placeholder="Enter access code"
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              className="inputPhoneNum"
+            />
+            <Button onClick={handleVerify} loading={loading}>
+              Verify
+            </Button>
+          </>
+        )}
+      </div>
     </div>
   );
 }

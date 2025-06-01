@@ -1,6 +1,12 @@
 .searchPage{
     padding: 5%;
 }
+.searchPage .ant-pagination {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
 @media (max-width: 480px) {
   .searchPage {
     margin-top: 10%;

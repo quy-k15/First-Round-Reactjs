@@ -102,7 +102,7 @@ const SearchPage = ({ query }) => {
 
   return (
     <div className="searchPage">
-      <h2>List of users who have '{query}' in their login</h2>
+      {query && <h2>List of users who have '{query}' in their login</h2>}
       <Table
         rowKey="id"
         columns={columns}
